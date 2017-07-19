@@ -81,7 +81,7 @@ local MQTT = {}
 
 MQTT.Utility = require("utility")
 
-MQTT.VERSION = 0x03
+MQTT.VERSION = 0x04
 
 MQTT.ERROR_TERMINATE = false      -- Message handler errors terminate process ?
 
@@ -161,7 +161,7 @@ end
 -- MQTT 3.1 Specification: Section 3.1: CONNECT
 
 function MQTT.client:connect(                                     -- Public API
-  identifier,    -- string: MQTT client identifier (maximum 23 characters)
+  identifier,    -- string: MQTT client identifier
   will_topic,    -- string: Last will and testament topic
   will_qos,      -- byte:   Last will and testament Quality Of Service
   will_retain,   -- byte:   Last will and testament retention status
@@ -187,7 +187,7 @@ function MQTT.client:connect(                                     -- Public API
 -- Construct CONNECT variable header fields (bytes 1 through 9)
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   local payload
-  payload = MQTT.client.encode_utf8("MQIsdp")
+  payload = MQTT.client.encode_utf8("MQTT")
   payload = payload .. string.char(MQTT.VERSION)
 
 -- Connect flags (byte 10)
